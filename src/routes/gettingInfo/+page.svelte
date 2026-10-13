@@ -4,9 +4,108 @@
     import {userData} from '$lib/userData';
     import {goto} from '$app/navigation';
     let name = '';
-    let island = '';
+    let island = $state('');
     let beachSafety = $state(10);
-    let trailLength = $state(4);
+    let trailLength = $state(4);    
+    
+    function getHawaiianIsland(lon, lat) {
+        const islands = {
+            Niihau: {
+                minLon: -160.3,
+                maxLon: -159.5,
+                minLat: 21.7,
+                maxLat: 22.1
+            },
+            Kauai: {
+                minLon: -159.8,
+                maxLon: -159.2,
+                minLat: 21.8,
+                maxLat: 22.3
+            },
+            Oahu: {
+                minLon: -158.3,
+                maxLon: -157.6,
+                minLat: 21.2,
+                maxLat: 21.8
+            },
+            Molokai: {
+                minLon: -157.4,
+                maxLon: -156.6,
+                minLat: 21.0,
+                maxLat: 21.3
+            },
+            Lanai: {
+                minLon: -157.1,
+                maxLon: -156.8,
+                minLat: 20.7,
+                maxLat: 21.0
+            },
+            Maui: {
+                minLon: -156.8,
+                maxLon: -155.9,
+                minLat: 20.5,
+                maxLat: 21.1
+            },
+            Hawaii: {
+                minLon: -156.1,
+                maxLon: -154.7,
+                minLat: 18.9,
+                maxLat: 20.3
+            }
+        };
+
+        for (const [island, box] of Object.entries(islands)) {
+            if (
+                lon >= box.minLon &&
+                lon <= box.maxLon &&
+                lat >= box.minLat &&
+                lat <= box.maxLat
+            ) {
+                return island;
+            }
+        }
+
+        return null;
+    }
+
+    function showPosition(position) {
+        userData.update((current) => ({
+            ...current,
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+        }));
+    }
+
+    async function showError() {
+        const res = await fetch("https://ipapi.co/json/");
+        const location = await res.json();
+
+        userData.update((current) => ({
+            ...current,
+            lat: location.latitude,
+            lon: location.longitude,
+        }));
+    }
+    
+    async function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            const res = await fetch("https://ipapi.co/json/");
+            const location = await res.json();
+
+            userData.update((current) => ({
+                ...current,
+                lat: location.latitude,
+                lon: location.longitude,
+            }));
+        }
+    }
+
+    async function getIsland() {
+        await getLocation()
+        island = getHawaiianIsland($userData.lon, $userData.lat)
+    }
 
     // Function to handle form submission
     function handleSubmit() {
@@ -37,16 +136,16 @@
 
     let container;
     
-    // Optional: You can use onMount to perform any setup when the component is mounted
+    
     onMount(() => {
-        console.log('Getting Info Page Mounted');
-
         const boxes = document.querySelectorAll('.question-input');
         console.log(boxes);
 
         boxes.forEach((element) => {
             element.addEventListener('submit', () => scrollNext());
         });
+        getIsland()
+
     });
 
 
@@ -95,12 +194,12 @@
             <select class="question-box"  bind:value={island}>
 
                 <option value="">Select your island</option>
-                <option value="island1">Big Island</option>
-                <option value="island2">Maui</option>
-                <option value="island3">Molokai</option>
-                <option value="island4">Lanai</option>
-                <option value="island5">Oahu</option>
-                <option value="island6">Kauai</option>
+                <option value="Hawaii">Big Island</option>
+                <option value="Maui">Maui</option>
+                <option value="Molokai">Molokai</option>
+                <option value="Lanai">Lanai</option>
+                <option value="Oahu">Oahu</option>
+                <option value="Kauai">Kauai</option>
 
             </select>
             <button type="submit" onclick={scrollNext}>

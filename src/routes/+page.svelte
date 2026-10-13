@@ -174,6 +174,8 @@
                 ...current,
                 island: getHawaiianIsland(current.lon, current.lat)
             }))
+
+            console.log($userData.island)
         } else {
             goto("gettingInfo");
 
