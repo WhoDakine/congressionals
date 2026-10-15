@@ -7,9 +7,15 @@
         <a href="/search" aria-label="Search" id="search">
             <i class="fa-solid fa-magnifying-glass"></i>
         </a>
+        <a href="/suggestion" aria-label="Suggestion" id="suggestion">
+            <i class="fa-solid fa-question"></i>
+        </a>
 
         <a href="/favorites" aria-label="Favorites" id="favorites">
             <i class="fa-regular fa-star"></i>
+        </a>
+        <a href="/settings" aria-label="Settings" id="settings">
+            <i class="fa-solid fa-gear"></i>        
         </a>
     </nav>
 </div>
@@ -28,9 +34,9 @@
     .bottom-nav nav {
         display: flex;
         align-items: center;
-        max-width: 175px;
+        max-width: 400px;
         margin: auto;
-        gap: 20px;
+        gap: 0px;
         justify-content: space-evenly;
         transition: max-width 0.3s ease 0s;
         padding-left: 10px;
@@ -39,10 +45,10 @@
     }
 
     .bottom-nav nav:hover {
-        max-width: 300px;
+        max-width: 500px;
     }
     .bottom-nav nav:not(:hover) {
-        max-width: 225px;
+        max-width: 400px;
         transition-delay: 0.1s;
     }
 
@@ -56,5 +62,8 @@
     nav {
         background-color: var(--footer-background-color);
         border-radius: 20px;
+    }
+    #suggestion i {
+        font-size: 1.2em;
     }
 </style>

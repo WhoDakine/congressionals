@@ -10,13 +10,13 @@
     import { userData } from "$lib/userData";
     import { distances } from "$lib/spotDistances";
     import { goto } from '$app/navigation';
-
+    import { resultArr } from "$lib/resultArr"
 
     var index = $state(0);
     let loading = $state(true);
     const trailDistances = [];
     const beachDistances = new Map();
-    let resultArr = $state([])
+    
     function distanceMiles(lat1, lon1, lat2, lon2) {
         const R = 3958.8; // Earth's radius in miles
 
@@ -235,8 +235,7 @@
             names: sortedBeaches
         }));
         loading = false;
-        resultArr = interweave($trails, $beaches)
-        console.log($trails)
+        $resultArr = interweave($trails, $beaches)
 
     }
 
@@ -252,7 +251,7 @@
         
         setUserData()
         if ($trails.length > 0 && $beaches.names.length > 0) {
-            resultArr = interweave($trails, $beaches)
+           $resultArr = interweave($trails, $beaches)
         }
 
     });
@@ -313,7 +312,7 @@
             <h4>Spots near you:</h4>
             <div class="slider">
                 {#if $trails.length > 0 && $beaches.names.length > 0}
-                    {#each resultArr as t, i}
+                    {#each $resultArr as t, i}
                         {#if i < 10}
                             {#if t.t == "trail"}
                                 <Trail trail={t.a}></Trail>
