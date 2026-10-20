@@ -1,6 +1,7 @@
 <header class="header">
     <div>
         <h1 class="pageTitle">hey cutie!</h1>
+        <h5>welcome to <i>NaluNav</i></h5>
         <small>lets explore shall we</small>
     </div>
     
@@ -15,7 +16,10 @@
         align-items: center;
     }
     .header div h1{
-        margin-bottom: 4px;
+        margin-bottom: 0.5rem;
+    }
+    .header div h5{
+        margin-bottom: 0px
     }
     .header div small{
         margin-bottom: 10px;

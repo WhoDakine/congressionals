@@ -127,7 +127,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	
+    <title>NaluNav</title>
 
 </svelte:head>
 <div class="app">
