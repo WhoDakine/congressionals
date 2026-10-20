@@ -1,19 +1,41 @@
 <script>
     import { userData } from "$lib/userData";
-    import { resultArr } from "$lib/resultArr";
+    import { resultArr, beachResult, trailResult, shouldTrail } from "$lib/resultArr";
     import Trail from "$lib/components/Trail.svelte"
     import Beach from "$lib/components/Beach.svelte"
+	import { goto } from '$app/navigation';
 
     import { onMount } from "svelte";
     let t = $state();
+
+
     function roll() {
-        let randomIndex = Math.round(Math.random() * $resultArr.length);
-        t = $resultArr[randomIndex];
+        if ($shouldTrail) {
+            let randomIndex = Math.round(Math.random() * $trailResult.length);
+            t ={
+                t: "trail",
+                a: $trailResult[randomIndex]
+            };        
+        } else {
+            let randomIndex = Math.round(Math.random() * $beachResult.names.length);
+            t ={
+                t: "beach",
+                a: $beachResult.names[randomIndex]
+            };
+        }
+
+        $shouldTrail = !$shouldTrail
     }
 
+
+
     onMount(() => {
-        roll()
-        console.log(t)
+        if ($beachResult.length == 0 || $trailResult.length == 0) {
+            goto("/?loadData=true")
+        } else {
+            roll()
+
+        }
     });
 </script>
 

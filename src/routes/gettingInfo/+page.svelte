@@ -46,7 +46,7 @@
                 minLat: 20.5,
                 maxLat: 21.1
             },
-            Hawaii: {
+            "Big Island": {
                 minLon: -156.1,
                 maxLon: -154.7,
                 minLat: 18.9,
@@ -74,6 +74,7 @@
             lat: position.coords.latitude,
             lon: position.coords.longitude,
         }));
+
     }
 
     async function showError() {
@@ -105,6 +106,7 @@
     async function getIsland() {
         await getLocation()
         island = getHawaiianIsland($userData.lon, $userData.lat)
+        console.log(island)
     }
 
     // Function to handle form submission
@@ -194,7 +196,7 @@
             <select class="question-box"  bind:value={island}>
 
                 <option value="">Select your island</option>
-                <option value="Hawaii">Big Island</option>
+                <option value="Big Island">Big Island</option>
                 <option value="Maui">Maui</option>
                 <option value="Molokai">Molokai</option>
                 <option value="Lanai">Lanai</option>

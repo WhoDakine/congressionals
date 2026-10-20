@@ -10,8 +10,11 @@
     import { userData } from "$lib/userData";
     import { distances } from "$lib/spotDistances";
     import { goto } from '$app/navigation';
-    import { resultArr } from "$lib/resultArr"
+    import { resultArr, trailResult, beachResult } from "$lib/resultArr"
+	import { page } from '$app/state';
 
+	// Automatically updates reactively when the URL changes
+	let search = page.url.searchParams.get('loadData');
     var index = $state(0);
     let loading = $state(true);
     const trailDistances = [];
@@ -236,11 +239,20 @@
         }));
         loading = false;
         $resultArr = interweave($trails, $beaches)
-
+        $trailResult = $trails;
+        $beachResult = $beaches;
     }
 
 
-    onMount(() => {
+
+
+    onMount(async () => {
+        if (search) {
+            await getTrails();
+            await getLocation();
+            goto("/suggestion")
+        }
+
         if ($beaches.names.length > 0) {
             loading = false
 
@@ -254,7 +266,9 @@
            $resultArr = interweave($trails, $beaches)
         }
 
+
     });
+
 
     function changePage() {
         goto("search");
