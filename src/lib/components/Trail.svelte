@@ -94,7 +94,11 @@
         <a href="/info?type=hike&id={trail.idKey}">
             <div class="trailBody">
                 <h5 class="trailName">{trail.name}</h5>
-                <small>Length: {trail.lengthMiles}mi {trail.dificulty}</small>
+                <p>
+                    Length: {trail.lengthMiles}mi {trail.dificulty}
+                    <br>
+                    <small>(always double check conditions)</small>
+                </p>
             </div>
         </a>
 

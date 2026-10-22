@@ -71,7 +71,8 @@
     }
 
     .siteContainer {
-        width: 50vw;
+        min-width: 50vw;
+        
     }
     #reroll {
         width: 10vw;

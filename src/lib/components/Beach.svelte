@@ -81,12 +81,14 @@
 
         <div>
             <h5 class="beachName">{beach.tags.name}</h5>
-            <small
+            <p
                 >Swim Score: {clamp(
                     beachData.swimming_safety.score + 50,
                     -100,
                     100,
-                )}</small
+                )} 
+                <br>
+                <small>(always double check conditions)</small></p
             >
         </div>
         <button onclick={addFav} id="favoriteButton" aria-label="Favorites">
