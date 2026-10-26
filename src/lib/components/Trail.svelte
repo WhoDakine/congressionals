@@ -120,13 +120,13 @@
         gap: 10px;
         border-radius: 20px;
         justify-content: space-between;
-        background-color: transparent;
+        background-color: #2B5748;
     }
     #favoriteButton {
         background-color: transparent;
     }
     .trailInfo {
-        color: var(--pico-text-color);
+        color: #FFF7DD;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -148,6 +148,6 @@
     }
 
     .enabled {
-        color: yellow
+        color: #FFF7DD;
     }
 </style>
