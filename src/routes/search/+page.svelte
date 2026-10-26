@@ -149,6 +149,7 @@
     main {
         display: flex;
         padding: 20px;
+        padding-top: 0;
         flex-direction: column;
     }
     main * {

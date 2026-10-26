@@ -99,7 +99,7 @@
         gap: 10px;
         border-radius: 20px;
         justify-content: space-between;
-        background-color: transparent;
+        background-color: #80A1BA;
     }
     .beachImage {
         max-height: 100%;
@@ -111,7 +111,7 @@
         height: 50%;
     }
     .beachInfo {
-        color: var(--beach-text-color);
+        color: #FFF7DD;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -125,6 +125,6 @@
     }
 
     .enabled {
-        color: yellow
+        color: #FFF7DD;
     }
 </style>
