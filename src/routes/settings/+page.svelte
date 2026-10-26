@@ -4,12 +4,12 @@
 
 <main>
     <div class="header">
-        <h1 class="pageTitle">settings</h1>
+        <h1 class="pageTitle">Settings</h1>
         <small>lets change some things</small>
     </div>
     <article>
-        <h3>change user data</h3>
-        <a href="./gettingInfo">Click to Change Your Information</a>
+        <h3>Change user data</h3>
+        <a href="./gettingInfo">Click <em>Here</em> to Change Your Information</a>
     </article>
 
 </main>

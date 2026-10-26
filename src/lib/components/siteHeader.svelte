@@ -1,7 +1,7 @@
 <header class="header">
     <div>
         <h1 class="pageTitle">hey cutie!</h1>
-        <h5>welcome to <i>NaluNav</i></h5>
+        <h5><em>Welcome to <i>NaluNav</i></em></h5>
         <small>lets explore shall we</small>
     </div>
     

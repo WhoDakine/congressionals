@@ -11,8 +11,8 @@
 
     let beachData = $beaches.data[beach.id];
     const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
-    let isInFavs = $state(
-        $userData.favBeach.some((t) => t.id === beach.id),
+    let isInFavs = $derived(
+        $userData.favBeach.some((favorite) => favorite.id === beach.id),
     );
 
     $effect(() => {
@@ -53,25 +53,12 @@
     }
 
     function addFav() {
-
-        if (!isInFavs) {
-            userData.update((current) => ({
-                ...current,
-                favBeach: [...current.favBeach, beach],
-            }));
-            isInFavs = true;
-
-        } else {
-            const updatedList = $userData.favBeach.filter(item => item !== beach);
-
-            userData.update((current) => ({
-                ...current,
-                favBeach: updatedList,
-            }));
-            console.log($userData.favBeach)
-            isInFavs = false
-        }
-
+        userData.update((current) => ({
+            ...current,
+            favBeach: current.favBeach.some((favorite) => favorite.id === beach.id)
+                ? current.favBeach.filter((favorite) => favorite.id !== beach.id)
+                : [...current.favBeach, beach],
+        }));
     }
 </script>
 

@@ -7,7 +7,7 @@
     let { trail } = $props();
     let image = $state("");
     let description = $state("");
-    let isInFavs = $state($userData.favTrails.some(t => t.name === trail.name))
+    let isInFavs = $derived($userData.favTrails.some((favorite) => favorite.name === trail.name))
 
     $effect(() => {
         coords = trail.coords;
@@ -64,26 +64,12 @@
     }
 
     function addFav() {
-        console.log(isInFavs)
-        if (!isInFavs) {
-
-            userData.update((current => ({
-                ...current,
-                favTrails: [...current.favTrails, trail]
-            })))
-            isInFavs = true
-
-        } else {
-            const updatedList = $userData.favTrails.filter(item => item !== trail);
-
-            userData.update((current) => ({
-                ...current,
-                favTrails: updatedList,
-            }));
-            isInFavs = false
-        }
-
-
+        userData.update((current) => ({
+            ...current,
+            favTrails: current.favTrails.some((favorite) => favorite.name === trail.name)
+                ? current.favTrails.filter((favorite) => favorite.name !== trail.name)
+                : [...current.favTrails, trail],
+        }));
     }
 
 </script>
