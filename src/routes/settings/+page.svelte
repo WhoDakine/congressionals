@@ -18,6 +18,13 @@
         }));
     }
 
+    function updateName(event) {
+        userData.update((current) => ({
+            ...current,
+            name: event.currentTarget.value,
+        }));
+    }
+
     function getSelectedIsland(value) {
         return islands.find((island) => island.toLowerCase() === String(value ?? "").toLowerCase()) ?? "";
     }
@@ -31,7 +38,8 @@
     <article>
         <section class="identity">
             <h2>Your details</h2>
-            <p><strong>Name</strong><span>{$userData.name || "Not set"}</span></p>
+            <label for="name">Name</label>
+            <input id="name" type="text" value={$userData.name} oninput={updateName} placeholder="Enter your name" />
             <label for="island">Island</label>
             <select id="island" value={getSelectedIsland($userData.island)} onchange={updateIsland}>
                 <option value="">Select your island</option>
