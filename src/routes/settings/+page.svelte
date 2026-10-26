@@ -8,6 +8,19 @@
             [preference]: value,
         }));
     }
+
+    const islands = ["Big Island", "Maui", "Molokai", "Lanai", "Oahu", "Kauai"];
+
+    function updateIsland(event) {
+        userData.update((current) => ({
+            ...current,
+            island: event.currentTarget.value,
+        }));
+    }
+
+    function getSelectedIsland(value) {
+        return islands.find((island) => island.toLowerCase() === String(value ?? "").toLowerCase()) ?? "";
+    }
 </script>
 
 <main>
@@ -16,8 +29,20 @@
         <small>View & Edit Your Preferences</small>
     </div>
     <article>
+        <section class="identity">
+            <h2>Your details</h2>
+            <p><strong>Name</strong><span>{$userData.name || "Not set"}</span></p>
+            <label for="island">Island</label>
+            <select id="island" value={getSelectedIsland($userData.island)} onchange={updateIsland}>
+                <option value="">Select your island</option>
+                {#each islands as island}
+                    <option value={island}>{island}</option>
+                {/each}
+            </select>
+        </section>
+
         <section class="preference">
-            <label for="beach-safety">Beach safety preference</label>
+            <label for="beach-safety">Beach Safety: </label>
             <output for="beach-safety">{$userData.swimSafety} / 10</output>
             <input
                 id="beach-safety"
@@ -31,7 +56,7 @@
         </section>
 
         <section class="preference">
-            <label for="trail-length">Maximum trail length</label>
+            <label for="trail-length">Max Trail Length: </label>
             <output for="trail-length">
                 {$userData.distance}{#if $userData.distance === 7}+ miles{:else if $userData.distance === 1} mile{:else} miles{/if}
             </output>
@@ -62,6 +87,26 @@
         flex-direction: column;
         gap: 1.5rem;
         max-width: 520px;
+        width: 100%;
+    }
+
+    .identity {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .identity h2 {
+        margin: 0;
+    }
+
+    .identity p {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0;
+    }
+
+    .identity select {
         width: 100%;
     }
 

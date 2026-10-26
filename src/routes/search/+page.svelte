@@ -2,38 +2,51 @@
     import Footer from "$lib/components/footer.svelte";
     import SiteHeader from "$lib/components/siteHeader.svelte";
     import { onMount } from "svelte";
-    let searchedTrails = $state([]);
-    let searchedBeaches = $state([]);
     let trails = $state([]);
     let beaches = $state([]);
-    let timeout = null;
-
     let query = $state("");
-    let array = $state([])
+    let selectedType = $state("all");
+    let selectedLetter = $state("");
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    $effect(() => {
-        console.log(query);
-        clearTimeout(timeout);
+    function normalize(value) {
+        return String(value ?? "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]/gi, "")
+            .toLowerCase();
+    }
 
-        timeout = setTimeout(() => {
-            if (query.length < 2) return;
-            searchedTrails = trails.filter(
-                (trail) =>
-                    trail.name.toLowerCase().includes(query.toLowerCase()) ||
-                    trail.island.toLowerCase().includes(query.toLowerCase()),
-            );
-            searchedBeaches = beaches.filter((beach) =>
-                beach.tags.name.toLowerCase().includes(query.toLowerCase()),
-            );
+    function matchesFilters(item, type) {
+        const name = type === "trail" ? item.name : item.tags?.name;
+        const normalizedName = normalize(name);
+        const normalizedQuery = query.trim().toLowerCase();
+        const matchesLetter = !selectedLetter || normalizedName.startsWith(selectedLetter.toLowerCase());
+        const matchesQuery = !normalizedQuery ||
+            String(name ?? "").toLowerCase().includes(normalizedQuery) ||
+            String(item.island ?? "").toLowerCase().includes(normalizedQuery);
 
-            array = interweave(searchedTrails, searchedBeaches)
-        }, 1000);
+        return matchesLetter && matchesQuery;
+    }
+
+    let results = $derived.by(() => {
+        const matchingTrails = selectedType !== "beach"
+            ? trails.filter((trail) => matchesFilters(trail, "trail"))
+            : [];
+        const matchingBeaches = selectedType !== "trail"
+            ? beaches.filter((beach) => matchesFilters(beach, "beach"))
+            : [];
+
+        return interweave(matchingTrails, matchingBeaches);
     });
+
+    let shouldShowResults = $derived(
+        query.trim().length > 0 || selectedLetter !== "" || selectedType !== "all",
+    );
 
     let loaded = $state(false);
     import Beach from "$lib/components/Beach.svelte";
     import Trail from "$lib/components/Trail.svelte";
-    import { get } from "svelte/store";
 
     async function getTrails() {
         const response = await fetch(`/api/trails`);
@@ -47,7 +60,7 @@
         var array = []
         for (let i = 0; i < maxLength; i++) {
             if (i < a1.length) {
-                array.push({
+                    array.push({
                     a: a1[i],
                     t: "trail"
                 })
@@ -92,9 +105,28 @@
         </fieldset>
     </form>
 
+    <div class="filterGroup" aria-label="Filter by type">
+        <button class:active={selectedType === "all"} aria-pressed={selectedType === "all"} onclick={() => selectedType = "all"}>All</button>
+        <button class:active={selectedType === "beach"} aria-pressed={selectedType === "beach"} onclick={() => selectedType = "beach"}>Beaches</button>
+        <button class:active={selectedType === "trail"} aria-pressed={selectedType === "trail"} onclick={() => selectedType = "trail"}>Trails</button>
+    </div>
+
+    <div class="alphabet" aria-label="Filter by first letter">
+        <button class:active={selectedLetter === ""} aria-pressed={selectedLetter === ""} onclick={() => selectedLetter = ""}>All</button>
+        {#each alphabet as letter}
+            <button
+                class:active={selectedLetter === letter}
+                aria-label="Names beginning with {letter}"
+                aria-pressed={selectedLetter === letter}
+                onclick={() => selectedLetter = selectedLetter === letter ? "" : letter}
+            >{letter}</button>
+        {/each}
+    </div>
+
     {#if loaded}
-        {#if query.length >= 2}
-            {#each array as t}
+        {#if shouldShowResults}
+            {#if results.length > 0}
+            {#each results as t (t.t === "trail" ? `trail-${t.a.idKey}` : `beach-${t.a.id}`)}
                 {#if t.t == "trail"}
 
                     <Trail trail={t.a}></Trail>
@@ -102,7 +134,11 @@
                     <Beach beach={t.a}></Beach>
                 {/if}
             {/each}
-
+            {:else}
+                <p class="emptyState">No matching spots found.</p>
+            {/if}
+        {:else}
+            <p class="emptyState">Search by name, choose a type, or select a letter.</p>
         {/if}
     {/if}
 </main>
@@ -119,6 +155,48 @@
     .findSpots {
         view-transition-name: findSpots;
         width: 100%;
+    }
+
+    .filterGroup {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .filterGroup button,
+    .alphabet button {
+        border: 1px solid var(--pico-muted-border-color, #777);
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .filterGroup button {
+        padding: 0.5rem 0.85rem;
+    }
+
+    .filterGroup button.active,
+    .alphabet button.active {
+        background: var(--pico-primary);
+        color: var(--pico-primary-inverse, white);
+    }
+
+    .alphabet {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .alphabet button {
+        min-width: 2rem;
+        min-height: 2rem;
+        padding: 0.25rem;
+    }
+
+    .emptyState {
+        padding: 1rem 0;
+        text-align: center;
     }
 
     .pageTitle {
