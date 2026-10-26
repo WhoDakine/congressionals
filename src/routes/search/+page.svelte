@@ -172,9 +172,9 @@
 
     .filterGroup button,
     .alphabet button {
-        border: 1px solid #80A1BA;
+        border: 1px solid #086288;
         background: #FFF7DD;
-        color: #80A1BA;
+        color: #086288;
         cursor: pointer;
     }
 
@@ -184,7 +184,7 @@
 
     .filterGroup button.active,
     .alphabet button.active {
-        background: #80A1BA;
+        background: #086288;
         color: #FFF7DD;
     }
 

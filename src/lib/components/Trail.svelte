@@ -150,7 +150,7 @@
         max-height: 80%;
     }
 
-    .enabled {
+    #favoriteButton i.enabled {
         color: yellow;
     }
 </style>

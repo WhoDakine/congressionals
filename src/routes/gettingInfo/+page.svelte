@@ -161,12 +161,12 @@
     }
 
     function getSafety(value) {
-        if (value < 6) {
-            return "not safe / only surfing"
-        } else if (value < 7) {
-            return "teenagers should be fine"
+        if (value < 5) {
+            return "Caution Advised!"
+        } else if (value < 8) {
+            return "Good for most!"
         } else {
-            return "my baby cousin can swim here"
+            return "A good day for everyone!"
         }
     }
 </script>

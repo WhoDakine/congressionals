@@ -101,7 +101,7 @@
         gap: 10px;
         border-radius: 20px;
         justify-content: space-between;
-        background-color: #80A1BA;
+        background-color: #086288;
     }
     .beachImage {
         max-height: 100%;
@@ -129,7 +129,7 @@
         color: #fff;
     }
 
-    .enabled {
+    #favoriteButton i.enabled {
         color: yellow;
     }
 </style>

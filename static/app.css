@@ -9,14 +9,14 @@
     /* Everything under this until the noted is useless until used */
     --pico-primary-border: none;
 
-    --pico-primary-hover: #80A1BA;
-    --pico-primary-hover-background: #80A1BA;
-    --pico-primary-hover-border: #80A1BA;
+    --pico-primary-hover: #086288;
+    --pico-primary-hover-background: #086288;
+    --pico-primary-hover-border: #086288;
 
     /* Secondary */
-    --pico-secondary: #80A1BA;
-    --pico-secondary-background: #80A1BA;
-    --pico-secondary-border: #80A1BA;
+    --pico-secondary: #086288;
+    --pico-secondary-background: #086288;
+    --pico-secondary-border: #086288;
 
     --pico-secondary-hover: #003049;
     --pico-secondary-hover-background: #003049;
@@ -37,14 +37,14 @@
     --pico-h4-color: #273338;
 
     /* Muted text */
-    --pico-muted-color: #80A1BA;
+    --pico-muted-color: #086288;
     --pico-muted-border-color: #669bbc;
     /* Niche Colors */
     --hike-color: #2B5748;
     --hike-text-color: #9CB080;
-    --beach-color: #80A1BA;
+    --beach-color: #086288;
     --beach-text-color: rgb(57, 61, 91);
-    --footer-background-color: #80A1BA;
+    --footer-background-color: #086288;
     --footer-text-color: #FFF7DD;
     --pico-border-radius: 20px
 }
@@ -59,7 +59,7 @@
   margin-bottom: 1rem;
   padding: 40px 20px 20px;
   flex-shrink: 0;
-  background-color: #80A1BA;
+  background-color: #086288;
   color: #FFF7DD;
 }
 
