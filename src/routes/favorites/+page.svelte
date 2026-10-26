@@ -20,7 +20,7 @@
 </script>
 
 <main>
-    <header class="header">
+    <header class="header page-header">
         <div>
             <h1>Favorites</h1>
             <small>Your saved trails and beaches can be found here!</small>

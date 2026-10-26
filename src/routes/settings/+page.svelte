@@ -31,7 +31,7 @@
 </script>
 
 <main>
-    <div class="header">
+    <div class="header page-header">
         <h1 class="pageTitle">Settings</h1>
         <small>View & Edit Your Preferences</small>
     </div>

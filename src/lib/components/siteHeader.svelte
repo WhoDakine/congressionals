@@ -1,7 +1,7 @@
-<header class="header">
+<header class="header page-header">
     <div>
         <h1 class="pageTitle">NaluNav</h1>
-        <small>lets go exploring!</small>
+        <small>Let's go exploring!</small>
     </div>
     
 </header>
