@@ -212,7 +212,7 @@
     </div>
 
     <div class="question">
-        <h3>from 0 - 10 how safe do u want beaches ?</h3>
+        <h3>How safe do you want beaches to be?</h3>
         <form action="" class="question-input">
 
             <input type="range" placeholder="your rating" class="question-box" min=0 max=10 bind:value={beachSafety}/>

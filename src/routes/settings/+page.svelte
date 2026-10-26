@@ -17,7 +17,7 @@
     </div>
     <article>
         <section class="preference">
-            <label for="beach-safety">Beach safety preference</label>
+            <label for="beach-safety">Beach Safety: </label>
             <output for="beach-safety">{$userData.swimSafety} / 10</output>
             <input
                 id="beach-safety"
@@ -31,7 +31,7 @@
         </section>
 
         <section class="preference">
-            <label for="trail-length">Maximum trail length</label>
+            <label for="trail-length">Max Trail Length: </label>
             <output for="trail-length">
                 {$userData.distance}{#if $userData.distance === 7}+ miles{:else if $userData.distance === 1} mile{:else} miles{/if}
             </output>
