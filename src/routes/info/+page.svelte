@@ -506,14 +506,16 @@
     import Footer from "$lib/components/footer.svelte";
     import { page } from '$app/state';
     import { onMount } from "svelte";
+    import beachKnowledge from "../../../beachData/json/hawaii_knowledge.json";
 
     const type = page.url.searchParams.get('type');
     const id = page.url.searchParams.get('id');
 
-    let details = $state();
-    let loaded = $state(false)
+    let details = $state(type === 'beach' ? beachKnowledge.beaches?.[id] : undefined);
+    let loaded = $state(type === 'beach');
 
     async function getDetails() {
+      if (type !== 'hike') return;
         const response = await fetch(`/api/trails?trail=${id}`);
         const data = await response.json();
         details = data.data;
@@ -527,10 +529,70 @@
 
 <main class="infoPage">
     {#if !loaded}
-    
         <h1 class="trailName page-header" aria-busy="true">Loading</h1>
+  {:else if !details}
+    <h1 class="page-header">Spot Information</h1>
+    <p>Information for this spot is unavailable.</p>
+  {:else if type === 'beach'}
+    <h1 class="trailName page-header">{details.name}</h1>
+    <div class="body">
+      <p><strong>Island:</strong> {details.island}</p>
+      <article>
+        <h3>About</h3>
+        <p>{details.description}</p>
+      </article>
+      <article>
+        <h3>Activities</h3>
+        {#if details.activities?.length}
+          <ul>
+            {#each details.activities as activity}
+              <li>{activity}</li>
+            {/each}
+          </ul>
+        {:else}
+          <p>No activities listed.</p>
+        {/if}
+      </article>
+      <article>
+        <h3>Lifeguards</h3>
+        <p>{details.lifeguarded ? "Lifeguarded" : "No lifeguard listed"}</p>
+        {#if details.lifeguard_schedule}
+          <p>{details.lifeguard_schedule}</p>
+        {/if}
+      </article>
+      {#if details.amenities?.length}
+        <article>
+          <h3>Amenities</h3>
+          <ul>
+            {#each details.amenities as amenity}
+              <li>{amenity}</li>
+            {/each}
+          </ul>
+        </article>
+      {/if}
+      {#if details.hazards?.length}
+        <article>
+          <h3>Hazards</h3>
+          <ul>
+            {#each details.hazards as hazard}
+              <li>{hazard}</li>
+            {/each}
+          </ul>
+        </article>
+      {/if}
+      {#if details.sources?.length}
+        <article>
+          <h3>Sources</h3>
+          <ul>
+            {#each details.sources as source}
+              <li><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a></li>
+            {/each}
+          </ul>
+        </article>
+      {/if}
+    </div>
     {:else}
-      <h1 class="trailName page-header">{details.name}</h1>
+    <h1 class="trailName page-header">{details.name}</h1>
 
         
         <div class="body">

@@ -67,7 +67,9 @@
     <div class="beachInfo">
 
         <div>
-            <h5 class="beachName">{beach.tags.name}</h5>
+            <a href="/info?type=beach&id={beach.id}">
+                <h5 class="beachName">{beach.tags.name}</h5>
+            </a>
             <p
                 >Swim Score: {clamp(
                     beachData.swimming_safety.score + 50,
@@ -123,8 +125,11 @@
     #favoriteButton {
         background-color: transparent;
     }
+    #favoriteButton i {
+        color: #fff;
+    }
 
     .enabled {
-        color: #FFF7DD;
+        color: yellow;
     }
 </style>
