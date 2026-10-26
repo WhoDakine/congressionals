@@ -7,13 +7,6 @@
 </header>
 
 <style>
-    .header {
-        display: flex;
-        width: 100dvw;
-        padding: 20px;
-        padding-top: 40px;
-        align-items: center;
-    }
     .header div h1{
         margin-bottom: 0.5rem;
     }
@@ -21,7 +14,7 @@
         margin-bottom: 0px
     }
     .header div small{
-        margin-bottom: 10px;
+        margin-bottom: 0;
     }
 
 </style>

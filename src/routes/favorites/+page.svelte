@@ -55,18 +55,10 @@
     }
     main {
     }
-    .header {
-        display: flex;
-        width: 100dvw;
-        padding: 20px;
-        padding-top: 40px;
-        padding-bottom: 0px;
-        align-items: center;
-    }
     .header div h1{
         margin-bottom: 4px;
     }
     .header div small{
-        margin-bottom: 10px;
+        margin-bottom: 0;
     }
 </style>
