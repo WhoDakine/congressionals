@@ -174,10 +174,12 @@
 
 <main id="main" bind:this={container}>
     <div class="title">
+        <div class="page-header onboarding-header">
+            <h2>Let's get to know you</h2>
+        </div>
         <h1>
             Hey!
         </h1>
-        <h2>Let's get to know you</h2>
     </div>
 
     <div class="question">
@@ -292,6 +294,12 @@
         flex-shrink: 0;
         position: sticky;
         scroll-snap-align: start; /* Snaps the top of the div to the top of the container */
+    }
+
+    .onboarding-header {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .question {

@@ -44,8 +44,32 @@
     --hike-text-color: #9CB080;
     --beach-color: #80A1BA;
     --beach-text-color: rgb(57, 61, 91);
-    --footer-background-color: #E3F2FD;
+    --footer-background-color: #80A1BA;
+    --footer-text-color: #FFF7DD;
     --pico-border-radius: 20px
+}
+
+.page-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 20px;
+  background-color: #80A1BA;
+  color: #FFF7DD;
+}
+
+.page-header h1,
+.page-header h2,
+.page-header small {
+  color: inherit;
+}
+
+.page-header h1,
+.page-header h2,
+.page-header small {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 i {

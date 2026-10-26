@@ -528,9 +528,9 @@
 <main class="infoPage">
     {#if !loaded}
     
-        <h1 class="trailName" aria-busy="true">Loading</h1>
+        <h1 class="trailName page-header" aria-busy="true">Loading</h1>
     {:else}
-    <h1 class="trailName">{details.name}</h1>
+      <h1 class="trailName page-header">{details.name}</h1>
 
         
         <div class="body">
@@ -568,10 +568,6 @@
         display: flex;
         flex-direction: column;
 
-    }
-
-    .trailName {
-        padding-top: 20px;
     }
 
   .preserve-breaks {

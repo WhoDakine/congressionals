@@ -92,7 +92,9 @@
 </script>
 
 <main>
-    <h1 style="padding-top: 20px;" class="pageTitle">Search Away!</h1>
+    <div class="page-header">
+        <h1 class="pageTitle">Search Away!</h1>
+    </div>
     <form class="findSpots">
         <fieldset role="group">
             <input

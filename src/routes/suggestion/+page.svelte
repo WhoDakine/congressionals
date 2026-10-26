@@ -43,8 +43,7 @@
 </script>
 
 <main>
-    <div>
-
+    <div class="page-header">
         <h1>Not Sure Where to Go?</h1>
     </div>
 

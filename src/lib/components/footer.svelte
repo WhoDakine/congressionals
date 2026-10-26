@@ -77,7 +77,11 @@
         background: currentColor;
     }
     a {
-        color: black;
+        color: var(--footer-text-color);
+    }
+
+    .bottom-nav i {
+        color: var(--footer-text-color);
     }
     nav {
         background-color: var(--footer-background-color);
