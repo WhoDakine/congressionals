@@ -154,6 +154,9 @@
     main * {
         border-radius: 20px;
     }
+    main .page-header {
+        border-radius: 0;
+    }
     .findSpots {
         view-transition-name: findSpots;
         width: 100%;

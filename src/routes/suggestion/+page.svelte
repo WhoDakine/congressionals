@@ -43,7 +43,7 @@
 </script>
 
 <main>
-    <div class="page-header">
+    <div class="page-header suggestion-header">
         <h1>Not Sure Where to Go?</h1>
     </div>
 
@@ -76,6 +76,12 @@
         min-width: 50vw;
         
     }
+
+    .suggestion-header {
+        justify-content: center;
+        text-align: center;
+    }
+
     #reroll {
         margin-top: 16px;
         padding: 8px 16px;
