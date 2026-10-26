@@ -525,6 +525,16 @@
     onMount(() => {
         getDetails();
     });
+
+    function formatAmenity(amenity) {
+      const normalized = String(amenity ?? "")
+        .trim()
+        .replace(/^and\s+/i, "")
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+
+      return normalized ? normalized[0].toUpperCase() + normalized.slice(1) : "";
+    }
 </script>
 
 <main class="infoPage">
@@ -565,7 +575,7 @@
           <h3>Amenities</h3>
           <ul>
             {#each details.amenities as amenity}
-              <li>{amenity}</li>
+              <li>{formatAmenity(amenity)}</li>
             {/each}
           </ul>
         </article>
@@ -576,16 +586,6 @@
           <ul>
             {#each details.hazards as hazard}
               <li>{hazard}</li>
-            {/each}
-          </ul>
-        </article>
-      {/if}
-      {#if details.sources?.length}
-        <article>
-          <h3>Sources</h3>
-          <ul>
-            {#each details.sources as source}
-              <li><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a></li>
             {/each}
           </ul>
         </article>

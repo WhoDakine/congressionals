@@ -1,5 +1,31 @@
 <script>
     import { userData } from "$lib/userData";
+    import beachKnowledge from "../../../beachData/json/hawaii_knowledge.json";
+    import cleanedSearchSources from "../../../beachData/json/searxng_cleaned.json";
+    import webSources from "../../../beachData/json/web_data.json";
+
+    let referencesDialog;
+
+    function getCollectionReferences(collection) {
+        return Object.values(collection ?? {}).flatMap((entries) =>
+            Array.isArray(entries) ? entries : [],
+        );
+    }
+
+    const referenceCandidates = [
+        ...Object.values(beachKnowledge.beaches ?? {}).flatMap((beach) => beach.sources ?? []),
+        ...getCollectionReferences(cleanedSearchSources),
+        ...getCollectionReferences(webSources),
+    ];
+
+    const references = [...new Map(
+        referenceCandidates
+            .filter((source) => source.url)
+            .map((source) => [source.url, {
+                name: source.name ?? source.title ?? source.url,
+                url: source.url,
+            }]),
+    ).values()];
 
     function updatePreference(preference, event) {
         const value = Number(event.currentTarget.value);
@@ -80,7 +106,28 @@
                 oninput={(event) => updatePreference("distance", event)}
             />
         </section>
+
+        <button type="button" class="references-button" onclick={() => referencesDialog?.showModal()}>
+            References ({references.length})
+        </button>
     </article>
+
+    <dialog bind:this={referencesDialog} aria-labelledby="references-title">
+        <header class="references-header">
+            <h2 id="references-title">Data References</h2>
+            <button type="button" class="close-button" aria-label="Close references" onclick={() => referencesDialog?.close()}>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </header>
+        <ul class="references-list">
+            {#each references as reference (reference.url)}
+                <li>
+                    <a href={reference.url} target="_blank" rel="noreferrer">{reference.name}</a>
+                    <small>{reference.url}</small>
+                </li>
+            {/each}
+        </ul>
+    </dialog>
 
 </main>
 
@@ -140,6 +187,56 @@
         grid-column: 1 / -1;
         width: 100%;
         accent-color: var(--pico-primary);
+    }
+
+    .references-button {
+        align-self: flex-start;
+    }
+
+    dialog {
+        width: min(720px, calc(100vw - 2rem));
+        max-height: min(80vh, 720px);
+        padding: 1.25rem;
+        border: 1px solid var(--pico-muted-border-color);
+        border-radius: 12px;
+        background: var(--pico-background-color);
+        color: var(--pico-color);
+    }
+
+    dialog::backdrop {
+        background: rgb(20 30 35 / 55%);
+    }
+
+    .references-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .references-header h2 {
+        margin: 0;
+    }
+
+    .close-button {
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+    }
+
+    .references-list {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-left: 1.25rem;
+    }
+
+    .references-list li {
+        margin-bottom: 0.75rem;
+    }
+
+    .references-list small {
+        display: block;
+        overflow-wrap: anywhere;
     }
     .findSpots {
         view-transition-name: findSpots;
