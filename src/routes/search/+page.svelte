@@ -157,6 +157,7 @@
     .findSpots {
         view-transition-name: findSpots;
         width: 100%;
+        margin-top: 1rem;
     }
 
     .filterGroup {
@@ -167,9 +168,9 @@
 
     .filterGroup button,
     .alphabet button {
-        border: 1px solid var(--pico-muted-border-color, #777);
-        background: transparent;
-        color: inherit;
+        border: 1px solid #80A1BA;
+        background: #FFF7DD;
+        color: #80A1BA;
         cursor: pointer;
     }
 
@@ -179,8 +180,8 @@
 
     .filterGroup button.active,
     .alphabet button.active {
-        background: var(--pico-primary);
-        color: var(--pico-primary-inverse, white);
+        background: #80A1BA;
+        color: #FFF7DD;
     }
 
     .alphabet {

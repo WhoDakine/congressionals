@@ -63,7 +63,6 @@
 
 <style>
     main {
-        padding-top: 40px;
         padding-left: 20px;
         padding-right: 20px;
 

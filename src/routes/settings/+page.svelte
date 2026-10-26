@@ -87,7 +87,6 @@
         display: flex;
         padding: 20px;
         flex-direction: column;
-        padding-top: 40px;
         gap: 1rem;
     }
     article {
