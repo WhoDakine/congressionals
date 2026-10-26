@@ -175,23 +175,23 @@
 <main id="main" bind:this={container}>
     <div class="title">
         <h1>
-            hey cutie !
+            Hey!
         </h1>
-        <h2>lets get to know you</h2>
+        <h2>Let's get to know you</h2>
     </div>
 
     <div class="question">
-        <h3>what is your name ?</h3>
+        <h3>What's your name?</h3>
         <form action="" class="question-input">
             <input type="text" placeholder="your name" class="question-box" bind:value={name}/>
             <button type="submit" onclick={scrollNext}>
-                <h3>next</h3>
+                <h3>Next</h3>
             </button>
         </form>
     </div>
 
     <div class="question">
-        <h3>what island are you on ?</h3>
+        <h3>Which island are you on?</h3>
         <form action="" class="question-input">
             <select class="question-box"  bind:value={island}>
 
@@ -205,7 +205,7 @@
 
             </select>
             <button type="submit" onclick={scrollNext}>
-                <h3>next</h3>
+                <h3>Next</h3>
             </button>
         </form>
 
@@ -220,13 +220,13 @@
             <h3>{getSafety(beachSafety)}</h3>
 
             <button type="submit" onclick={scrollNext}>
-                <h3>next</h3>
+                <h3>Next</h3>
             </button>
         </form>
     </div>
 
     <div class="question">
-        <h3>what would be the max trail length for you be ?</h3>
+        <h3>How long do you prefer your trails to be?</h3>
         <form action="" class="question-input">
             <input type="range" placeholder="your rating" class="question-box" min=0 max=7 bind:value={trailLength}/>
             <h3>
@@ -245,14 +245,14 @@
                 {/if}
             </h3>
             <button type="submit" onclick={scrollNext}>
-                <h3>next</h3>
+                <h3>Next</h3>
             </button>
         </form>
     </div>
 
     <div class="question">
         <button  onclick={handleSubmit}>
-            <h1>get started !</h1>
+            <h1>Get Started!</h1>
         </button>
 
     </div>
