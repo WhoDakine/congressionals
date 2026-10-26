@@ -32,8 +32,10 @@
 
 <main>
     <div class="header page-header">
-        <h1 class="pageTitle">Settings</h1>
-        <small>View & Edit Your Preferences</small>
+        <div>
+            <h1 class="pageTitle">Settings</h1>
+            <small>View & Edit Your Preferences</small>
+        </div>
     </div>
     <article>
         <section class="identity">
@@ -86,6 +88,7 @@
     main {
         display: flex;
         padding: 20px;
+        padding-top: 0;
         flex-direction: column;
         gap: 1rem;
     }
