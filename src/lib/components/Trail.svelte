@@ -7,7 +7,7 @@
     let { trail } = $props();
     let image = $state("");
     let description = $state("");
-    let isInFavs = $derived($userData.favTrails.some((favorite) => favorite.name === trail.name))
+    let isInFavs = $state($userData.favTrails.some(t => t.name === trail.name))
 
     $effect(() => {
         coords = trail.coords;
@@ -64,12 +64,26 @@
     }
 
     function addFav() {
-        userData.update((current) => ({
-            ...current,
-            favTrails: current.favTrails.some((favorite) => favorite.name === trail.name)
-                ? current.favTrails.filter((favorite) => favorite.name !== trail.name)
-                : [...current.favTrails, trail],
-        }));
+        console.log(isInFavs)
+        if (!isInFavs) {
+
+            userData.update((current => ({
+                ...current,
+                favTrails: [...current.favTrails, trail]
+            })))
+            isInFavs = true
+
+        } else {
+            const updatedList = $userData.favTrails.filter(item => item !== trail);
+
+            userData.update((current) => ({
+                ...current,
+                favTrails: updatedList,
+            }));
+            isInFavs = false
+        }
+
+
     }
 
 </script>
@@ -80,11 +94,7 @@
         <a href="/info?type=hike&id={trail.idKey}">
             <div class="trailBody">
                 <h5 class="trailName">{trail.name}</h5>
-                <p>
-                    Length: {trail.lengthMiles}mi {trail.dificulty}
-                    <br>
-                    <small>(always double check conditions)</small>
-                </p>
+                <small>Length: {trail.lengthMiles}mi {trail.dificulty}</small>
             </div>
         </a>
 

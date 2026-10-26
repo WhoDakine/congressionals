@@ -142,7 +142,7 @@
         console.log(data.data);
         const ISLAND = $trails.filter(
             (trail) =>
-                trail.island === "OAHU" &&
+                trail.island === $userData.island.toUpperCase() &&
                 trail.closed === false &&
                 trail.lengthMiles != null &&
                 trail.lengthMiles <= $userData.distance,
