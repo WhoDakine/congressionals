@@ -23,7 +23,7 @@
     <header class="header">
         <div>
             <h1>Favorites</h1>
-            <small>lets relive a memory</small>
+            <small>Your saved trails and beaches can be found here!</small>
         </div>
 
     </header>
