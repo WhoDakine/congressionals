@@ -9,22 +9,25 @@
     let t = $state();
 
 
-    function roll() {
-        if ($shouldTrail) {
-            let randomIndex = Math.round(Math.random() * $trailResult.length);
+    function roll(type) {
+        const selectedType = type ?? ($shouldTrail ? "trail" : "beach");
+        if (selectedType === "trail") {
+            let randomIndex = Math.floor(Math.random() * $trailResult.length);
             t ={
                 t: "trail",
                 a: $trailResult[randomIndex]
             };        
         } else {
-            let randomIndex = Math.round(Math.random() * $beachResult.names.length);
+            let randomIndex = Math.floor(Math.random() * $beachResult.names.length);
             t ={
                 t: "beach",
                 a: $beachResult.names[randomIndex]
             };
         }
 
-        $shouldTrail = !$shouldTrail
+        if (type == null) {
+            $shouldTrail = !$shouldTrail;
+        }
     }
 
 
@@ -42,7 +45,7 @@
 <main>
     <div>
 
-        <h1>not sure where to go ?</h1>
+        <h1>Not Sure Where to Go?</h1>
     </div>
 
     <div class="siteContainer">
@@ -52,10 +55,11 @@
             {:else}
                 <Beach beach={t.a}></Beach>
             {/if}
+            <button id="reroll" onclick={() => roll(t.t)}>Reroll</button>
         {/if}
     </div>
-    <small>this place is really good ^</small>
-    <small>go there now but check local conditions</small>
+    <small>Check out this spot!</small>
+    <small>Make sure to check local conditions before visiting.</small>
 </main>
 
 <style>
@@ -75,7 +79,8 @@
         
     }
     #reroll {
-        width: 10vw;
-        padding: none;
+        margin-top: 16px;
+        padding: 8px 16px;
+        cursor: pointer;
     }
 </style>

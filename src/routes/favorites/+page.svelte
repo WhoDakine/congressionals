@@ -22,14 +22,14 @@
 <main>
     <header class="header">
         <div>
-            <h1>its ur favs!</h1>
+            <h1>Favorites</h1>
             <small>lets relive a memory</small>
         </div>
 
     </header>
     <div class="favDIv">
         {#if $userData.favTrails.length == 0 && $userData.favBeach.length == 0}
-            <h3>no favs at this moment</h3>
+            <h3>You haven't added any favorites yet.</h3>
         {:else}
             {#each $userData.favTrails as item}
                 <Trail trail={item}></Trail>
