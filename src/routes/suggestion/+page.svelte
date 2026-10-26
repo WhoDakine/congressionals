@@ -55,7 +55,7 @@
             {:else}
                 <Beach beach={t.a}></Beach>
             {/if}
-            <button id="reroll" on:click={() => roll(t.t)}><img src="/reroll.png" alt="Reroll" /></button>
+            <button id="reroll" on:click={() => roll(t.t)}>Reroll</button>
         {/if}
     </div>
     <small>Check out this spot!</small>
