@@ -125,6 +125,9 @@
     #favoriteButton {
         background-color: transparent;
     }
+    #favoriteButton i {
+        color: #fff;
+    }
     .trailInfo {
         color: #FFF7DD;
         display: flex;
@@ -148,6 +151,6 @@
     }
 
     .enabled {
-        color: #FFF7DD;
+        color: yellow;
     }
 </style>
